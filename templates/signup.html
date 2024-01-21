@@ -3,60 +3,59 @@
 
 <head>
     <title>petpuja.ab.mm</title>
-    <link href="../static/login.css" rel="stylesheet">
+    <!-- <link href="../static/login.css" rel="stylesheet"> -->
+
 </head>
 
 <body>
     <div class="container">
-        <p><span class="typed-text" id="typee"></span><span class="cursor">&nbsp;</span></p>
+        <!-- Add any content or styling for the signup page header here -->
     </div>
     <div class="box">
         <span class="borderLine"></span>
         <form id="signupForm" action="{{ url_for('signup') }}" method="POST">
             <h2>Sign up</h2>
 
-            <label style="color: white;" for="role">Choose your role</label>
+            <label for="role">Choose your role</label>
             <select name="role" id="role">
-                <option value="Student">Student</option>
-                <option value="CanteenAdmin">Canteen</option>
+              <option value="Student">Student</option>
+              <option value="CanteenAdmin">Canteen</option>
             </select>
-
+          
             <div class="inputBox">
-                <p style="color: white;">Enter your Roll number</p>
-                <input type="number" required="required" id="id" name="id">
+                <span class="Roll number">Roll number</span>
+                <input type="text" required="required" id="id" name="id">
                 <i></i>
             </div>
 
             <div class="inputBox">
-                <p style="color: white;">Enter your Name</p>
+                <span class="username">Name</span>
                 <input type="text" required="required" id="name" name="name">
                 <i></i>
             </div>
 
-            <div class="inputBox">
-                <p style="color: white;">Enter your Email</p>
-                <input type="text" required="required" id="email" name="email">
-                <i></i>
-            </div>
-
-            <div class="inputBox">
-                <p style="color: white;">Enter your Phone number</p>
-                <input type="number" required="required" id="phone" name="phone">
-                <i></i>
-            </div>
-
-            <div class="inputBox">
-                <p style="color: white;">Enter your Password</p>
-                <input type="password" required="required" id="password" name="password">
-                <i></i>
-            </div>
-
+        </div>
+        <div class="inputBox">
+            <span class="Email">Email</span>
+            <input type="text" required="required" id="email" name="email">
+            <i></i>
+        </div>
+        <div class="inputBox">
+            <span class="Phone number">Phone number</span>
+            <input type="number" required="required" id="phone" name="phone">
+            <i></i>
+        </div>
+        <div class="inputBox">
+            <span class="password">Enter Password</span>
+            <input type="text" required="required" id="password" name="password">
+            <i></i>
+            <br>
             <input type="submit" value="Signup">
         </form>
     </div>
 
     <script>
-        // Similar to the script in login.html
+
     </script>
 
 </body>
