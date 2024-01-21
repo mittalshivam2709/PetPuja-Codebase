@@ -14,6 +14,8 @@ users = {
     # Add more users as needed
 }
 
+
+
 @app.route('/', methods=['POST','GET'])
 def login():
     if request.method == 'POST':
@@ -22,7 +24,6 @@ def login():
         username = request.form['id']
         password = request.form['password']
         conn, cursor = get_db_connection()
-
         if(role=='Student'):
             user = cursor.execute('SELECT * FROM customers WHERE id = ?', (username,)).fetchone()
 
@@ -42,12 +43,14 @@ def login():
                 # Login successful
                 # return redirect(url_for('home'))
                 print("Login successful")
+                conn.close()
                 return render_template('index2.html')
 
             else:
                 # Login unsuccessful
                 # return jsonify({'success': False})
                 # flash('Incorrect password')
+                conn.close()
                 return '<script>alert("Incorrect Password Entered!");window.location.href = "/";</script>'
 
                 # return render_template('login.html')
@@ -59,6 +62,7 @@ def login():
             if(user == None):
                 # flash('Invalid Roll number.')
                 # print('Invalid Roll number.')
+                conn.close()
                 return '<script>alert("Incorrect Canteen Number Entered!");window.location.href = "/";</script>'
             # print(user)
 
@@ -73,12 +77,14 @@ def login():
                 # Login successful
                 # return redirect(url_for('home'))
                 print("Login successful")
+                conn.close()
                 return render_template('orders.html')
 
             else:
                 # Login unsuccessful
                 # return jsonify({'success': False})
                 # flash('Incorrect password')
+                conn.close()
                 return '<script>alert("Incorrect Password Entered!");window.location.href = "/";</script>'
 
                 # return render_template('login.html')
@@ -117,7 +123,7 @@ def signup():
         conn.commit()
         conn.close()
 
-    return render_template('login.html')
+    return render_template('signup.html')
 
 
 @app.route('/stock.html', methods=['POST','GET'])
@@ -127,6 +133,36 @@ def stocktoorders():
 @app.route('/orders.html', methods=['POST','GET'])
 def ordertostock():
     return render_template('stock.html')
+
+@app.route('/menu.html', methods=['POST','GET'])
+def select_canteen():
+    conn = sqlite3.connect('PetPuja.db')
+    c = conn.cursor()
+    c.execute("SELECT id,name FROM canteen")
+    data=c.fetchall()
+    datalol=[]
+
+    if request.method=='POST':
+        id = request.form['id']
+        c.execute("SELECT name,price from Prepared_dishes WHERE canteen_id=(?)", (id))
+        datalol=c.fetchall()
+    conn.close()
+    return render_template('menu.html', canteen=data, datalol=datalol)
+
+
+@app.route('/use_canteen', methods=['POST', 'GET'])
+def use_canteen():
+    id = request.form['id']
+    print(id)
+    conn = sqlite3.connect('PetPuja.db')
+    c = conn.cursor()
+    c.execute("SELECT name,price from Prepared_dishes WHERE canteen_id=(?)", (id))
+    datalol=c.fetchall()
+    c.execute("SELECT id,name FROM canteen")
+    data=c.fetchall()
+    print(datalol, data)
+    conn.close()
+    return render_template('menu.html', canteen=data, datalol=datalol)
 
 @app.route("/index2.html",methods=['POST','GET'])
 def home():
