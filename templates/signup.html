@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>petpuja.ab.mm</title>
+    <!-- <link href="../static/login.css" rel="stylesheet"> -->
+
+</head>
+
+<body>
+    <div class="container">
+        <!-- Add any content or styling for the signup page header here -->
+    </div>
+    <div class="box">
+        <span class="borderLine"></span>
+        <form id="signupForm" action="{{ url_for('signup') }}" method="POST">
+            <h2>Sign up</h2>
+
+            <label for="role">Choose your role</label>
+            <select name="role" id="role">
+              <option value="Student">Student</option>
+              <option value="CanteenAdmin">Canteen</option>
+            </select>
+          
+            <div class="inputBox">
+                <span class="Roll number">Roll number</span>
+                <input type="text" required="required" id="id" name="id">
+                <i></i>
+            </div>
+
+            <div class="inputBox">
+                <span class="username">Name</span>
+                <input type="text" required="required" id="name" name="name">
+                <i></i>
+            </div>
+
+        </div>
+        <div class="inputBox">
+            <span class="Email">Email</span>
+            <input type="text" required="required" id="email" name="email">
+            <i></i>
+        </div>
+        <div class="inputBox">
+            <span class="Phone number">Phone number</span>
+            <input type="number" required="required" id="phone" name="phone">
+            <i></i>
+        </div>
+        <div class="inputBox">
+            <span class="password">Enter Password</span>
+            <input type="text" required="required" id="password" name="password">
+            <i></i>
+            <br>
+            <input type="submit" value="Signup">
+        </form>
+    </div>
+
+    <script>
+
+    </script>
+
+</body>
+</html>
